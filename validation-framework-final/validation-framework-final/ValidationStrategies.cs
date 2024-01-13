@@ -1,11 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace validation_framework_final
 {
+    // Concrete strategy for email validation
+    public class EmailValidationStrategy : IValidationStrategy
+    {
+        public bool Validate(string input)
+        {
+            // Implement email validation logic
+            // This is a simple example using a regular expression
+            // You may use a more sophisticated validation approach
+            string emailPattern = @"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
+            return Regex.IsMatch(input, emailPattern);
+        }
+    }
+
+    // Your existing validation strategies remain unchanged
+
     // Define the strategy interface
     public interface IValidationStrategy
     {

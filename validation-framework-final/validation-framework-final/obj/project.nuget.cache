@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "cXc4vT2Nzkhw1RZ+XO89Phz5/CY6YkmsdOk8kSV/wmg7Y/m6BHOIn/+V0Rljdtd2W4A2MiM3JK6zBGNXOiRaEQ==",
+  "dgSpecHash": "9gOPfsPtaYMXKgmS+q4B4l94wvNYhcvxwfrgT93m954obj+ie8imUIEfHfzIwPhHflL990tgrjRISz9fj+x/SA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Sawashi\\Desktop\\final\\validation-framework-final\\validation-framework-final\\validation-framework-final.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Sawashi\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.17\\microsoft.netcore.app.host.win-x64.5.0.17.nupkg.sha512"
+  ],
   "logs": []
 }
