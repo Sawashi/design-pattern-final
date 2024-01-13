@@ -11,14 +11,8 @@ namespace validation_framework_final
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            // Instantiate your main form
-            Form1 mainForm = new Form1();
-
-            // Run the application
-            Application.Run(mainForm);
+            ValidationFramework validationFramework = new ValidationFramework();
+            validationFramework.mailValidationWindow();
         }
     }
 

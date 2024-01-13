@@ -31,6 +31,7 @@ namespace validation_framework_final
         {
             textBox1 = new System.Windows.Forms.TextBox();
             button1 = new System.Windows.Forms.Button();
+            label1 = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
             // textBox1
@@ -51,11 +52,22 @@ namespace validation_framework_final
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new System.Drawing.Point(234, 220);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(50, 20);
+            label1.TabIndex = 2;
+            label1.Text = "label1";
+            label1.Click += label1_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(800, 450);
+            Controls.Add(label1);
             Controls.Add(button1);
             Controls.Add(textBox1);
             Name = "Form1";
@@ -69,6 +81,7 @@ namespace validation_framework_final
 
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label1;
     }
 }
 
