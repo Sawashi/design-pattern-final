@@ -36,51 +36,59 @@ namespace validation_framework_final
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
             SuspendLayout();
-
+            // 
             // textBox1
+            // 
             textBox1.Location = new System.Drawing.Point(234, 190);
             textBox1.Name = "textBox1";
             textBox1.Size = new System.Drawing.Size(208, 27);
             textBox1.TabIndex = 0;
             textBox1.TextChanged += textBox1_TextChanged;
-
+            // 
             // button1
+            // 
+            button1.BackColor = System.Drawing.Color.Indigo;
+            button1.ForeColor = System.Drawing.Color.Azure;
             button1.Location = new System.Drawing.Point(472, 190);
             button1.Name = "button1";
             button1.Size = new System.Drawing.Size(94, 29);
             button1.TabIndex = 1;
             button1.Text = "Validate";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
-            
+            // 
             // label1
+            // 
             label1.AutoSize = true;
             label1.Location = new System.Drawing.Point(234, 220);
-            label1.Name = "label1";
+            label1.Name = "Notification text";
             label1.Size = new System.Drawing.Size(50, 20);
             label1.TabIndex = 2;
-            label1.Text = "label1";
+            label1.Text = "Notification text";
             label1.Click += label1_Click;
-            
+            // 
             // label2
+            // 
             label2.AutoSize = true;
             label2.Location = new System.Drawing.Point(231, 161);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(160, 20);
             label2.TabIndex = 3;
-            label2.Text = "Type an email to check";
+            label2.Text = "Plese input an email to check";
             label2.Click += label2_Click;
-            
+            // 
             // Form1
+            // 
             AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            BackColor = System.Drawing.SystemColors.ControlLight;
             ClientSize = new System.Drawing.Size(800, 450);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(button1);
             Controls.Add(textBox1);
             Name = "Form1";
-            Text = "Form1";
+            Text = "Validation Framework UI";
             Load += Form1_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -88,7 +96,7 @@ namespace validation_framework_final
 
         private void label1_Click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
 
         #endregion
