@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace validation_framework_final
 {
-    public interface ICustomValidator
+    public interface ICustomValidator : IValidator
     {
         bool Validate(string input);
     }
