@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 namespace validation_framework_final
 {
+    // Define the observer interface
     // Define the observer interface
     public interface IValidationObserver
     {
@@ -14,17 +17,18 @@ namespace validation_framework_final
     // Concrete implementation of the observer
     public class ValidationObserver : IValidationObserver
     {
-        private readonly string componentName; // Name of the UI component being observed
+        private readonly Control uiComponent; // UI component being observed
 
-        public ValidationObserver(string componentName)
+        public ValidationObserver(ValidationFramework validationFramework, Control uiComponent)
         {
-            this.componentName = componentName;
+            this.uiComponent = uiComponent;
+            validationFramework.SubscribeObserver(this);
         }
 
         public void UpdateValidationStatus(bool isValid, List<string> errorMessages)
         {
             // Update the UI component based on validation status
-            Console.WriteLine($"{componentName} Validation Status: {isValid}");
+            Console.WriteLine($"{uiComponent.Name} Validation Status: {isValid}");
 
             // Display error messages if any
             if (!isValid)
@@ -37,6 +41,19 @@ namespace validation_framework_final
             }
 
             // Additional logic to update UI components as needed
+            UpdateUI(isValid, errorMessages);
+        }
+
+        private void UpdateUI(bool isValid, List<string> errorMessages)
+        {
+            // Update UI components based on validation status
+            if (uiComponent is Label label)
+            {
+                label.Text = isValid ? "Validation Passed" : "Validation Failed";
+                label.BackColor = isValid ? Color.Green : Color.Red;
+                label.Show();
+            }
+            // Add more conditions as needed for other UI components
         }
     }
 }

@@ -8,21 +8,26 @@ using System.Windows.Forms;
 namespace validation_framework_final
 {
     // Class representing the ValidationFramework
+    // Class representing the ValidationFramework
     public class ValidationFramework
     {
-        public void mailValidationWindow()
+        private readonly List<IValidationStrategy> strategies;
+        private readonly List<IValidationObserver> observers;
+        public void MailValidationWindow()
         {
-            // Instantiate your main form
-            Form1 mainForm = new Form1("strategy");
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            // Create an instance of Form1 and pass the ValidationFramework to it
+            Form1 mainForm = new Form1("strategy", this);
 
             // Run the application
             Application.Run(mainForm);
         }
-        private readonly List<IValidationStrategy> strategies;
-
         public ValidationFramework()
         {
             strategies = new List<IValidationStrategy>();
+            observers = new List<IValidationObserver>();
         }
 
         public void AddValidationStrategy(IValidationStrategy strategy)
@@ -30,11 +35,17 @@ namespace validation_framework_final
             strategies.Add(strategy);
         }
 
-        public bool ProcessValidation(string value)
+        public void SubscribeObserver(IValidationObserver observer)
         {
-            return false;
+            observers.Add(observer);
         }
-        public bool validateMail(string value)
+
+        public void UnsubscribeObserver(IValidationObserver observer)
+        {
+            observers.Remove(observer);
+        }
+
+        public bool Validate(string value)
         {
             // Process validation using all registered strategies
             foreach (var strategy in strategies)
@@ -42,14 +53,23 @@ namespace validation_framework_final
                 if (!strategy.Validate(value))
                 {
                     // Validation failed
-                    Console.WriteLine("Validation failed using strategy: " + strategy.GetType().Name);
+                    NotifyObservers(false, new List<string> { $"Validation failed using strategy: {strategy.GetType().Name}" });
                     return false;
                 }
             }
 
             // All validations passed
-            Console.WriteLine("Validation passed using all strategies.");
+            NotifyObservers(true, new List<string> { "Validation passed using all strategies." });
             return true;
         }
+
+        private void NotifyObservers(bool isValid, List<string> errorMessages)
+        {
+            foreach (var observer in observers)
+            {
+                observer.UpdateValidationStatus(isValid, errorMessages);
+            }
+        }
+
     }
 }

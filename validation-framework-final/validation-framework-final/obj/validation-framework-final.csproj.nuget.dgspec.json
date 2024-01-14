@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Sawashi\\Desktop\\final\\validation-framework-final\\validation-framework-final\\validation-framework-final.csproj": {}
+    "C:\\Users\\Sawashi\\Desktop\\design_pattern\\validation-framework-final\\validation-framework-final\\validation-framework-final.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Sawashi\\Desktop\\final\\validation-framework-final\\validation-framework-final\\validation-framework-final.csproj": {
+    "C:\\Users\\Sawashi\\Desktop\\design_pattern\\validation-framework-final\\validation-framework-final\\validation-framework-final.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Sawashi\\Desktop\\final\\validation-framework-final\\validation-framework-final\\validation-framework-final.csproj",
+        "projectUniqueName": "C:\\Users\\Sawashi\\Desktop\\design_pattern\\validation-framework-final\\validation-framework-final\\validation-framework-final.csproj",
         "projectName": "validation-framework-final",
-        "projectPath": "C:\\Users\\Sawashi\\Desktop\\final\\validation-framework-final\\validation-framework-final\\validation-framework-final.csproj",
+        "projectPath": "C:\\Users\\Sawashi\\Desktop\\design_pattern\\validation-framework-final\\validation-framework-final\\validation-framework-final.csproj",
         "packagesPath": "C:\\Users\\Sawashi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Sawashi\\Desktop\\final\\validation-framework-final\\validation-framework-final\\obj\\",
+        "outputPath": "C:\\Users\\Sawashi\\Desktop\\design_pattern\\validation-framework-final\\validation-framework-final\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Sawashi\\AppData\\Roaming\\NuGet\\NuGet.Config",

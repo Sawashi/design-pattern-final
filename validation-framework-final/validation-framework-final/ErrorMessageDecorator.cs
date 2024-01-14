@@ -6,28 +6,45 @@ using System.Threading.Tasks;
 
 namespace validation_framework_final
 {
+    // Base decorator interface for error message decoration
     public interface IErrorMessageDecorator
     {
-        string Decorate(List<string> errorMessages);
+        List<string> Decorate(List<string> errorMessages);
     }
 
-    // Concrete decorator for formatting error messages with severity
+    // Concrete decorator for severity formatting
     public class SeverityDecorator : IErrorMessageDecorator
     {
-        public string Decorate(List<string> errorMessages)
+        private readonly IErrorMessageDecorator innerDecorator;
+
+        public SeverityDecorator(IErrorMessageDecorator innerDecorator)
+        {
+            this.innerDecorator = innerDecorator;
+        }
+
+        public List<string> Decorate(List<string> errorMessages)
         {
             // Apply severity formatting to error messages
-            return $"[ERROR] {string.Join(" | ", errorMessages)}";
+            List<string> decoratedMessages = new List<string> { $"[Decorated message] {string.Join(" | ", errorMessages)}" };
+            return innerDecorator != null ? innerDecorator.Decorate(decoratedMessages) : decoratedMessages;
         }
     }
 
     // Concrete decorator for additional formatting
     public class FormatDecorator : IErrorMessageDecorator
     {
-        public string Decorate(List<string> errorMessages)
+        private readonly IErrorMessageDecorator innerDecorator;
+
+        public FormatDecorator(IErrorMessageDecorator innerDecorator)
+        {
+            this.innerDecorator = innerDecorator;
+        }
+
+        public List<string> Decorate(List<string> errorMessages)
         {
             // Apply additional formatting to error messages
-            return $"*** {string.Join(Environment.NewLine, errorMessages)} ***";
+            List<string> decoratedMessages = new List<string> { $"*** {string.Join(Environment.NewLine, errorMessages)} ***" };
+            return innerDecorator != null ? innerDecorator.Decorate(decoratedMessages) : decoratedMessages;
         }
     }
 }
