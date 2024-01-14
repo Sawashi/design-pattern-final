@@ -8,7 +8,6 @@ using System.Windows.Forms;
 namespace validation_framework_final
 {
     // Class representing the ValidationFramework
-    // Class representing the ValidationFramework
     public class ValidationFramework
     {
         private readonly List<IValidationStrategy> strategies;
@@ -70,6 +69,5 @@ namespace validation_framework_final
                 observer.UpdateValidationStatus(isValid, errorMessages);
             }
         }
-
     }
 }

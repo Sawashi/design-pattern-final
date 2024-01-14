@@ -18,24 +18,21 @@ namespace validation_framework_final
 
     public class MainForm : Form
     {
-        // You can add UI components and controls here
 
         public MainForm()
         {
             // Initialize UI components and controls
-
-            // Example of integrating the validation framework
             // InitializeValidationFramework();
         }
     }
 
-    // Example data object with properties marked for validation
+    // Data object with properties marked for validation, delete later
     public class DataObject
     {
-        [Validation] // Example of marking a property for validation
+        [Validation] // Marking a property for validation
         public string StringField { get; set; }
 
-        [Validation] // Example of marking another property for validation
+        [Validation] // Marking another property for validation
         public int NumericField { get; set; }
     }
 }
