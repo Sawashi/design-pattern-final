@@ -8,7 +8,6 @@ using System.Windows.Forms;
 namespace validation_framework_final
 {
     // Define the observer interface
-    // Define the observer interface
     public interface IValidationObserver
     {
         void UpdateValidationStatus(bool isValid, List<string> errorMessages);
@@ -53,7 +52,6 @@ namespace validation_framework_final
                 label.BackColor = isValid ? Color.Green : Color.Red;
                 label.Show();
             }
-            // Add more conditions as needed for other UI components
         }
     }
 }

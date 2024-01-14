@@ -10,13 +10,10 @@ namespace validation_framework_final
         {
             // Implement email validation logic
             // This is a simple example using a regular expression
-            // You may use a more sophisticated validation approach
             string emailPattern = @"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
             return Regex.IsMatch(input, emailPattern);
         }
     }
-
-    // Your existing validation strategies remain unchanged
 
     // Define the strategy interface
     public interface IValidationStrategy
@@ -30,7 +27,6 @@ namespace validation_framework_final
         public bool Validate(string input)
         {
             // Implement manual validation logic
-            // You can customize this method based on your specific requirements
             return !string.IsNullOrWhiteSpace(input);
         }
     }
@@ -41,7 +37,6 @@ namespace validation_framework_final
         public bool Validate(string input)
         {
             // Implement attribute-based validation logic
-            // You can customize this method based on your specific requirements
             return !string.IsNullOrEmpty(input);
         }
     }
@@ -59,7 +54,6 @@ namespace validation_framework_final
         public bool Validate(string input)
         {
             // Implement regular expression validation logic
-            // You can customize this method based on your specific requirements
             return System.Text.RegularExpressions.Regex.IsMatch(input, regexPattern);
         }
     }
@@ -67,14 +61,10 @@ namespace validation_framework_final
     // Concrete strategy for custom validation
     public class CustomValidationStrategy : IValidationStrategy
     {
-        // You can add any necessary properties or dependencies for custom validation
-
         public bool Validate(string input)
         {
             // Implement custom validation logic
-            // You can customize this method based on your specific requirements
-            // Consider using any additional properties or dependencies you added
-            return true; // Placeholder, replace with actual custom validation logic
+            return true; // Placeholder change later
         }
     }
 }

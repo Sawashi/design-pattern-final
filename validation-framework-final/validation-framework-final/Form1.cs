@@ -56,12 +56,9 @@ namespace validation_framework_final
 
         private void UpdateUI(bool isValid, List<string> errorMessages)
         {
-            
                 label1.Text = isValid ? "Validation Passed" : "Validation Failed";
                 label1.BackColor = isValid ? System.Drawing.Color.Green : System.Drawing.Color.Red;
                 label1.Show();
-            
-            // Add more conditions as needed for other UI components
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -93,6 +90,7 @@ namespace validation_framework_final
         {
             label1.Hide();
         }
+
         // Handle the Form1 Load event
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -101,7 +99,7 @@ namespace validation_framework_final
 
         private void label2_Click(object sender, EventArgs e)
         {
-
+            // not needed yet
         }
     }
 }
