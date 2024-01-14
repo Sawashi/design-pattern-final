@@ -1,52 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace validation_framework_final
 {
-    // Interface for custom validation
     public interface ICustomValidator
     {
         bool Validate(string input);
     }
-
-    // Factory for creating custom validators
     public class CustomValidatorFactory
     {
-        private readonly Dictionary<string, ICustomValidator> customValidators = new Dictionary<string, ICustomValidator>();
-
-        public void RegisterCustomValidator(string validationKey, ICustomValidator customValidator)
+        public ICustomValidator CreateValidator(string validatorType)
         {
-            if (customValidator == null)
+            switch (validatorType)
             {
-                throw new ArgumentNullException(nameof(customValidator));
+                case "String":
+                    return new StringValidator();
+                case "Numeric":
+                    return new NumericValidator();
+                // Add more cases for different validator types as needed
+                default:
+                    throw new ArgumentException("Invalid validator type");
             }
-
-            customValidators[validationKey] = customValidator;
-        }
-
-        public bool ValidateWithCustomValidator(string validationKey, string input)
-        {
-            if (customValidators.TryGetValue(validationKey, out var customValidator))
-            {
-                return customValidator.Validate(input);
-            }
-
-            // No custom validator found for the given key
-            throw new InvalidOperationException($"No custom validator found for key: {validationKey}");
         }
     }
-
-    // Example of a custom validator
-    public class ExampleCustomValidator : ICustomValidator
+    public class StringValidator : ICustomValidator
     {
         public bool Validate(string input)
         {
-            // Implement custom validation logic
-            // You can customize this method based on your specific requirements
-            return !string.IsNullOrWhiteSpace(input);
+            // Implement validation logic for strings
+            return !string.IsNullOrEmpty(input);
+        }
+    }
+    public class NumericValidator : ICustomValidator
+    {
+        public bool Validate(string input)
+        {
+            // Implement validation logic for numeric values
+            return int.TryParse(input, out _);
         }
     }
 }

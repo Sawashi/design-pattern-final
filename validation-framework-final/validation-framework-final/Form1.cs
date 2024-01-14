@@ -11,60 +11,74 @@ using System.Windows.Forms;
 
 namespace validation_framework_final
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form, IValidationObserver
     {
         private string typePattern;
         private ValidationFramework validationFramework;
-        private ValidationObserver validationObserver;
         private IErrorMessageDecorator errorDecorator;
+        private CustomValidatorFactory validatorFactory;
 
-        public Form1()
-        {
-            InitializeComponent();
-            label1.Hide();
-            this.StartPosition = FormStartPosition.CenterScreen;
-            validationFramework = new ValidationFramework();
-            errorDecorator = new SeverityDecorator(new FormatDecorator(null));
-
-            // Add the EmailValidationStrategy to the ValidationFramework
-            validationFramework.AddValidationStrategy(new EmailValidationStrategy());
-
-            // Subscribe the observer to the validation framework
-            validationObserver = new ValidationObserver(validationFramework, label1);
-        }
         public Form1(string typePattern, ValidationFramework validationFramework)
         {
             InitializeComponent();
             label1.Hide();
             this.StartPosition = FormStartPosition.CenterScreen;
             this.validationFramework = validationFramework;
-            errorDecorator = new SeverityDecorator(new FormatDecorator(null));
+            this.validatorFactory = new CustomValidatorFactory();
 
             // Add the EmailValidationStrategy to the ValidationFramework
             validationFramework.AddValidationStrategy(new EmailValidationStrategy());
 
-            // Subscribe the observer to the validation framework
-            validationObserver = new ValidationObserver(validationFramework, label1);
+            // Decorate error messages with SeverityDecorator and FormatDecorator
+            errorDecorator = new SeverityDecorator(new FormatDecorator(null));
+
+            // Subscribe this form as an observer to the validation framework
+            validationFramework.SubscribeObserver(this);
         }
 
-        public Form1(string typePattern) : this()
+        public void UpdateValidationStatus(bool isValid, List<string> errorMessages)
         {
-            this.typePattern = typePattern;
+            Console.WriteLine($"{Name} Validation Status: {isValid}");
+
+            if (!isValid)
+            {
+                Console.WriteLine("Error Messages:");
+                foreach (var errorMessage in errorMessages)
+                {
+                    Console.WriteLine($"- {errorMessage}");
+                }
+            }
+
+            // Additional logic to update UI components as needed
+            UpdateUI(isValid, errorMessages);
+        }
+
+        private void UpdateUI(bool isValid, List<string> errorMessages)
+        {
+            
+                label1.Text = isValid ? "Validation Passed" : "Validation Failed";
+                label1.BackColor = isValid ? System.Drawing.Color.Green : System.Drawing.Color.Red;
+                label1.Show();
+            
+            // Add more conditions as needed for other UI components
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             string input = textBox1.Text;
 
-            // Process validation using the selected strategy
-            bool validationResult = validationFramework.Validate(input);
+            // Use the factory to create a custom validator based on some criteria
+            ICustomValidator customValidator = validatorFactory.CreateValidator("String");
+
+            // Process validation using the selected strategy and custom validator
+            bool validationResult = validationFramework.Validate(input) && customValidator.Validate(input);
 
             // Decorate error messages
-            List<string> errorMessages = new List<string> { validationResult ? "Input is a valid email address." : "Input is not a valid email address." };
-            List<string> decoratedMessages = errorDecorator.Decorate(errorMessages);
+            List<string> errorMessages = new List<string> { validationResult ? "Input is valid." : "Input is not valid." };
+            string decoratedMessages = errorDecorator.Decorate(errorMessages);
 
             // Display the result
-            label1.Text = string.Join(Environment.NewLine, decoratedMessages);
+            label1.Text = decoratedMessages;
             label1.BackColor = validationResult ? Color.Green : Color.Red;
             label1.Show();
         }
