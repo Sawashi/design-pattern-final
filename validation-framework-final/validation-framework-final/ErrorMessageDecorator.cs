@@ -9,42 +9,51 @@ namespace validation_framework_final
     // Base decorator interface for error message decoration
     public interface IErrorMessageDecorator
     {
-        List<string> Decorate(List<string> errorMessages);
+        string Decorate(List<string> errorMessages);
     }
 
     // Concrete decorator for severity formatting
     public class SeverityDecorator : IErrorMessageDecorator
     {
-        private readonly IErrorMessageDecorator innerDecorator;
+        private readonly IErrorMessageDecorator wrappedDecorator;
 
-        public SeverityDecorator(IErrorMessageDecorator innerDecorator)
+        public SeverityDecorator(IErrorMessageDecorator wrappedDecorator)
         {
-            this.innerDecorator = innerDecorator;
+            this.wrappedDecorator = wrappedDecorator;
         }
 
-        public List<string> Decorate(List<string> errorMessages)
+        public string Decorate(List<string> errorMessages)
         {
-            // Apply severity formatting to error messages
-            List<string> decoratedMessages = new List<string> { $"[Decorated message] {string.Join(" | ", errorMessages)}" };
-            return innerDecorator != null ? innerDecorator.Decorate(decoratedMessages) : decoratedMessages;
+            string decoratedMessages = $"[Result check] {string.Join(" | ", errorMessages)}";
+
+            if (wrappedDecorator != null)
+            {
+                decoratedMessages = wrappedDecorator.Decorate(new List<string> { decoratedMessages });
+            }
+
+            return decoratedMessages;
         }
     }
 
-    // Concrete decorator for additional formatting
     public class FormatDecorator : IErrorMessageDecorator
     {
-        private readonly IErrorMessageDecorator innerDecorator;
+        private readonly IErrorMessageDecorator wrappedDecorator;
 
-        public FormatDecorator(IErrorMessageDecorator innerDecorator)
+        public FormatDecorator(IErrorMessageDecorator wrappedDecorator)
         {
-            this.innerDecorator = innerDecorator;
+            this.wrappedDecorator = wrappedDecorator;
         }
 
-        public List<string> Decorate(List<string> errorMessages)
+        public string Decorate(List<string> errorMessages)
         {
-            // Apply additional formatting to error messages
-            List<string> decoratedMessages = new List<string> { $"*** {string.Join(Environment.NewLine, errorMessages)} ***" };
-            return innerDecorator != null ? innerDecorator.Decorate(decoratedMessages) : decoratedMessages;
+            string decoratedMessages = $"*** {string.Join(Environment.NewLine, errorMessages)} ***";
+
+            if (wrappedDecorator != null)
+            {
+                decoratedMessages = wrappedDecorator.Decorate(new List<string> { decoratedMessages });
+            }
+
+            return decoratedMessages;
         }
     }
 }
