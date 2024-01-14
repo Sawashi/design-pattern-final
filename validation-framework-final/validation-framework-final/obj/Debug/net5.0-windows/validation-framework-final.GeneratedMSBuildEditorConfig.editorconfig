@@ -14,6 +14,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = validation_framework_final
-build_property.ProjectDir = C:\Users\Sawashi\Desktop\design_pattern\validation-framework-final\validation-framework-final\
+build_property.ProjectDir = D:\git_data\design-pattern-final\validation-framework-final\validation-framework-final\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
