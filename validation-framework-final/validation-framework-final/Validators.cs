@@ -21,6 +21,11 @@ namespace validation_framework_final
             validators.Add(validator);
         }
 
+        public void AddValidator(ICustomValidator customValidator)
+        {
+            validators.Add(customValidator);
+        }
+
         public bool Validate(string input)
         {
             // Execute all validators in the composite
@@ -55,16 +60,13 @@ namespace validation_framework_final
         }
     }
 
-    // Custom validator implementing the strategy pattern
+    // Custom validator
     public class CustomValidator : IValidator
     {
-        // You can add any necessary properties or dependencies for custom validation
-
+        ICustomValidator customValidator;
         public bool Validate(string input)
         {
-            // Implement custom validation logic
-            // Consider using any additional properties or dependencies you added
-            return true; // Placeholder, replace with actual custom validation logic
+            return customValidator.Validate(input);
         }
     }
 

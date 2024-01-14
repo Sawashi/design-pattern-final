@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -66,12 +67,17 @@ namespace validation_framework_final
         private void button1_Click(object sender, EventArgs e)
         {
             string input = textBox1.Text;
-
             // Use the factory to create a custom validator based on some criteria
             ICustomValidator customValidator = validatorFactory.CreateValidator("String");
 
+            // Create composite validator and add the custom validator to the list
+            // If there are more than 1 validator they should all be added to the list
+            // The composite validator will go through every children in the list, call the validate method and let the children handle the real work
+            CompositeValidator compositeValidator = new CompositeValidator();
+            compositeValidator.AddValidator(customValidator);
+
             // Process validation using the selected strategy and custom validator
-            bool validationResult = validationFramework.Validate(input) && customValidator.Validate(input);
+            bool validationResult = validationFramework.Validate(input) && compositeValidator.Validate(input);
 
             // Decorate error messages
             List<string> errorMessages = new List<string> { validationResult ? "Input is valid." : "Input is not valid." };
